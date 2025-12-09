@@ -1,0 +1,104 @@
+<!-- 
+  FireCast Wildfire Monitor - Dashboard HTML structure
+  Code developed with assistance from Claude (Anthropic)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireCast Wildfire Monitor</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header class="header">
+        <div>
+            <h1>FireCast Wildfire Tracking</h1>
+            <span>Satellite-Based Perimeter Construction</span>
+        </div>
+        <div class="year-filter">
+            <button class="year-btn active" data-year="all">All</button>
+            <button class="year-btn" data-year="2021">2021</button>
+            <button class="year-btn" data-year="2022">2022</button>
+            <button class="year-btn" data-year="2023">2023</button>
+            <button class="year-btn" data-year="2024">2024</button>
+            <button class="year-btn" data-year="2025">2025</button>
+        </div>
+    </header>
+
+    <section class="map-section">
+        <div id="map"></div>
+
+        <div class="layer-controls">
+            <label class="layer-toggle" id="togglePred">
+                <span class="layer-dot pred"></span>
+                <span>Predicted</span>
+            </label>
+            <label class="layer-toggle" id="toggleActual">
+                <span class="layer-dot actual"></span>
+                <span>CAL FIRE</span>
+            </label>
+        </div>
+
+        <div class="detail-panel" id="detailPanel">
+            <div class="resize-handle" id="resizeHandle"></div>
+            <div class="detail-header">
+                <div>
+                    <h2 id="detailName">Fire Name</h2>
+                    <div class="badges">
+                        <span class="badge badge-f125" id="badgeF125">F1.25: --</span>
+                        <span class="badge badge-iou" id="badgeIoU">IoU: --</span>
+                    </div>
+                </div>
+                <button class="close-btn" id="closeBtn">×</button>
+            </div>
+            <div class="detail-content">
+                <div class="timeline">
+                    <div class="timeline-top">
+                        <h3>Fire Progression</h3>
+                        <span id="windowNum">Window 1/1</span>
+                    </div>
+                    <input type="range" class="slider" id="slider" min="0" max="10" value="10">
+                    <div class="timeline-bottom">
+                        <span id="timelineDate">--</span>
+                        <button class="play-btn" id="playBtn">Play</button>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><h4>Predicted Area</h4><div class="stat-value" id="statPredArea">--</div><div class="stat-label">km²</div></div>
+                    <div class="stat-card"><h4>Actual Area</h4><div class="stat-value" id="statActualArea">--</div><div class="stat-label">km²</div></div>
+                    <div class="stat-card">
+                        <h4>Evaluation Metrics</h4>
+                        <div class="stat-row">
+                            <div class="stat-item">
+                                <div class="stat-value" id="statF125">--</div>
+                                <div class="stat-label">F1.25</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="statIoU">--</div>
+                                <div class="stat-label">IoU</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card"><h4>Detections</h4><div class="stat-value" id="statDet">--</div></div>
+                    <div class="stat-card"><h4>Duration</h4><div class="stat-value" id="statDuration">--</div><div class="stat-label">days</div></div>
+                    <div class="stat-card"><h4>Peak Spread</h4><div class="stat-value" id="statPeakSpread">--</div><div class="stat-label">acres/hr</div></div>
+                    <div class="stat-card"><h4>Avg Spread</h4><div class="stat-value" id="statAvgSpread">--</div><div class="stat-label">acres/hr</div></div>
+                    <div class="stat-card"><h4>Area</h4><div class="stat-value" id="statAcres">--</div><div class="stat-label">acres</div></div>
+                </div>
+                <div class="charts">
+                    <div class="chart-card"><h4>Area by Date (km²)</h4><canvas id="areaChart"></canvas></div>
+                    <div class="chart-card"><h4>Spread Rate (acres/hr)</h4><canvas id="spreadChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
