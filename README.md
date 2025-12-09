@@ -22,11 +22,11 @@ This project uses two data sources that must be downloaded separately:
   - Requires free NASA Earthdata account (https://urs.earthdata.nasa.gov/users/new)
   - Select VIIRS (S-NPP, NOAA-20, NOAA-21) for California region
   - Select date range: January 2021 – March 2025
-  - Place downloaded files in `data/firms_data/`
+  - Place downloaded zip files in `data/firms_data/`
 
-- **CAL FIRE Perimeters**: Download from https://www.fire.ca.gov/what-we-do/fire-resource-assessment-program/fire-perimeters
-  - Download "California Fire Perimeters (all)"
-  - Place shapefile in `data/calfire_data/`
+- **CAL FIRE Perimeters**: Download from https://gis.data.ca.gov/datasets/CALFIRE-Forestry::california-fire-perimeters-all/explore
+  - Click the download icon and select "Shapefile"
+  - Unzip and place contents in `data/calfire_data/`
 
 Data is owned by NASA and CAL FIRE respectively and used here for educational purposes.
 
