@@ -26,6 +26,7 @@ This project uses two data sources that must be downloaded separately:
 - **NASA FIRMS VIIRS Detections**: Download from https://firms.modaps.eosdis.nasa.gov/download/
   - Requires free NASA Earthdata account (https://urs.earthdata.nasa.gov/users/new)
   - Select VIIRS (S-NPP, NOAA-20, NOAA-21) for California region
+  - Select date range: January 2021 – March 2025
   - Place downloaded files in `data/firms_data/`
 
 - **CAL FIRE Perimeters**: Download from https://www.fire.ca.gov/what-we-do/fire-resource-assessment-program/fire-perimeters
@@ -36,23 +37,33 @@ Data is owned by NASA and CAL FIRE respectively and used here for educational pu
 
 ## How to Run
 
-1. **Preprocess data** (or use pre-saved parquet files):
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+The following steps run the full pipeline from data preprocessing through dashboard export:
+
+1. **Preprocess data**:
 ```python
    from data_preprocessing import load_data
    load_data()
 ```
+   This filters and joins the raw FIRMS and CAL FIRE data. Pre-saved parquet files (`firms_filtered.parquet`, `calfire_filtered.parquet`) are included in the repository, so this step can be skipped.
 
 2. **Run the analysis notebook**:
-   Open `FireCast_Perimeter_Analysis.ipynb` and run cells sequentially. Pre-computed results are available in `data/perimeters/` to skip computationally expensive cells.
+   Open `FireCast_Perimeter_Analysis.ipynb` and run cells sequentially. The notebook walks through parameter tuning, perimeter generation, and evaluation. Pre-computed results in `data/perimeters/` can be loaded to skip computationally expensive cells, as noted in the notebook.
 
 3. **Export dashboard data**:
 ```bash
    python export_dashboard.py
 ```
+   This exports perimeter geometries and fire metadata to JSON format in `dashboard/dashboard_data/` for use by the web dashboard. To run the dashboard locally, open `dashboard/index.html` in a browser.
 
 ## File Structure
 ```
 FireCast/
+├── README.md
 ├── data_preprocessing.py                 # FIRMS/CAL FIRE data loading and filtering
 ├── perimeter_pipeline.py                 # Perimeter construction algorithm
 ├── export_dashboard.py                   # Export data for web dashboard
@@ -68,7 +79,7 @@ FireCast/
 │   └── perimeters/
 │       ├── fire_evaluation.parquet       # Evaluation metrics per fire
 │       └── window_perimeters.parquet     # Perimeters at each observation window
-├── dashboard/
+├── dashboard/                            # Interactive web dashboard and exported data
 │   ├── index.html
 │   ├── styles.css
 │   ├── app.js
@@ -76,7 +87,7 @@ FireCast/
 │       ├── fire_data.json
 │       └── perimeters/
 └── reports/
-    └── FireCast_Final_Report.pdf
+    └── FireCast_Final_Report.pdf         # Full system analysis
 ```
 
 ## Authors
