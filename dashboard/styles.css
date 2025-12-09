@@ -1,0 +1,224 @@
+/*
+ * FireCast Wildfire Monitor - Dashboard styling
+ * Code developed with assistance from Claude (Anthropic)
+ */
+
+:root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --fire: #f85149;
+    --calfire: #00ff99;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --border: #30363d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Outfit', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: var(--bg2);
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 { font-size: 1.5rem; }
+.header span { font-size: 0.85rem; color: var(--text2); }
+
+.year-filter { display: flex; gap: 0.5rem; }
+
+.year-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.year-btn:hover { border-color: var(--fire); }
+.year-btn.active { background: var(--fire); color: white; border-color: var(--fire); }
+
+.map-section { flex: 1; position: relative; }
+#map { width: 100%; height: 100%; }
+
+.layer-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem;
+    z-index: 1000;
+}
+
+.layer-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.layer-dot { width: 12px; height: 12px; border-radius: 3px; }
+.layer-dot.pred { background: var(--fire); }
+.layer-dot.actual { background: var(--calfire); }
+.layer-toggle.off .layer-dot { opacity: 0.3; }
+
+.detail-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg2);
+    border-top: 2px solid var(--fire);
+    height: 380px;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+    z-index: 1001;
+}
+
+.detail-panel.open { transform: translateY(0); }
+
+.resize-handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    cursor: ns-resize;
+}
+
+.resize-handle:hover { background: rgba(248,81,73,0.3); }
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-header h2 { font-size: 1.1rem; }
+
+.badges { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
+.badge { font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.badge-f125 { background: rgba(248,81,73,0.15); color: #f85149; }
+.badge-iou { background: rgba(0,255,153,0.15); color: var(--calfire); }
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text2);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.detail-content {
+    padding: 1rem;
+    overflow-y: auto;
+    height: calc(100% - 60px);
+}
+
+.timeline {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-top { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.timeline-top h3 { font-size: 0.7rem; color: var(--text2); }
+.timeline-top span { color: var(--fire); font-size: 0.85rem; }
+
+.slider { width: 100%; margin-bottom: 0.5rem; }
+
+.timeline-bottom { display: flex; justify-content: space-between; align-items: center; }
+.timeline-bottom span { font-size: 0.8rem; color: var(--text2); }
+
+.play-btn {
+    background: var(--fire);
+    border: none;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.stat-card {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.stat-card h4 { font-size: 0.7rem; color: var(--text2); margin-bottom: 0.3rem; text-transform: uppercase; }
+.stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 600; }
+.stat-label { font-size: 0.7rem; color: var(--text2); }
+
+#statPredArea { color: var(--fire); }
+#statActualArea { color: var(--calfire); }
+
+.stat-sub {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--text2);
+}
+
+.stat-sub span span { font-weight: 500; color: var(--text); }
+
+.stat-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.chart-card {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.chart-card h4 { font-size: 0.65rem; color: var(--text2); margin-bottom: 0.5rem; }
+.chart-card canvas { height: 100px !important; }
+
+.leaflet-popup-content-wrapper { background: var(--bg2); color: var(--text); border-radius: 8px; }
+.leaflet-popup-tip { background: var(--bg2); }
+.popup-title { font-weight: 600; margin-bottom: 0.5rem; }
+.popup-stat { font-size: 0.85rem; color: var(--text2); }
+.popup-btn {
+    width: 100%;
+    background: var(--fire);
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
