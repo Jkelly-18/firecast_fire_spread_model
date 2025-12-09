@@ -4,7 +4,7 @@
 
 Wildfires have become an increasingly prominent challenge in California, with several fires causing massive devastation to homeowners and the environment. Effective wildfire management depends on timely response and accurate information about current conditions, yet there is currently a lack of real-time automated reporting for wildfire perimeters.
 
-FireCast is an algorithm that estimates wildfire perimeter progression through the lifecycle of a fire using NASA FIRMS satellite detections and geospatial analysis techniques. The system clusters thermal detections using DBSCAN, merges nearby fire fronts, filters outlier points, and constructs polygon boundaries using concave hull methods. By testing on 93 historical California wildfires from 2021-2025, we establish a foundation to adapt the system to real-time perimeter prediction during active wildfires.
+FireCast is an algorithm that estimates wildfire perimeter progression through the lifecycle of a fire using NASA FIRMS satellite detections and geospatial analysis techniques. The system clusters thermal detections using DBSCAN, merges nearby fire fronts, filters outlier points, and constructs polygon boundaries using concave hull methods. By testing on 93 historical California wildfires from 2021-2025, we establish a foundation to later adapt the system to real-time perimeter prediction during active wildfires.
 
 Our algorithm achieved a mean F1.25 score of 0.870 and IoU of 0.751 across all evaluated fires, demonstrating strong geometric agreement with official CAL FIRE perimeter records.
 
