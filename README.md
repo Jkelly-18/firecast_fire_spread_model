@@ -12,7 +12,7 @@ Our algorithm achieved a mean F1.25 score of 0.870 and IoU of 0.751 across all e
 
 The interactive dashboard allows you to explore all 93 fires, filter by year, step through observation windows to watch fire progression, and compare predicted perimeters against official CAL FIRE boundaries.
 
-For full methodology and analysis, see the project report: `reports/FireCast_Final_Report.pdf`
+For full methodology and analysis, see the project report: `reports/Satellite-Based Wildfire Perimeter Construction Using FIRMS Detections.pdf`
 
 ## Data Access
 
@@ -74,13 +74,15 @@ FireCast/
 │   └── perimeters/
 │       ├── fire_evaluation.parquet       # Evaluation metrics per fire
 │       └── window_perimeters.parquet     # Perimeters at each observation window
-└── dashboard/                            # Interactive web dashboard and exported data
-    ├── index.html
-    ├── styles.css
-    ├── app.js
-    └── dashboard_data/
-        ├── fire_data.json
-        └── perimeters/
+├── dashboard/                            # Interactive web dashboard and exported data
+│   ├── index.html
+│   ├── styles.css
+│   ├── app.js
+│   └── dashboard_data/
+│       ├── fire_data.json
+│       └── perimeters/
+└── reports/
+    └── Satellite-Based Wildfire Perimeter Construction Using FIRMS Detections.pdf
 ```
 
 ## Authors
